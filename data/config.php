@@ -13,16 +13,16 @@
  */
 
 // database host
-$dbhost   = "127.0.0.1";
+$dbhost   = "59.188.254.120";
 
 // database name
-$dbname   = "dou";
+$dbname   = "a0708173645";
 
 // database username
-$dbuser   = "root";
+$dbuser   = "a0708173645";
 
 // database password
-$dbpass   = "123456";
+$dbpass   = "08b43f8a";
 
 // table prefix
 $prefix   = "dou_";

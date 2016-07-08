@@ -65,6 +65,7 @@ if ($rec == 'system') {
         }
         
         $dou->create_admin_log($_LANG['mobile'] . ' - ' . $_LANG['mobile_system'] . ': ' . $_LANG['edit_succes']);
+        
         $dou->dou_msg($_LANG['edit_succes'], 'mobile.php');
     }
 } 
@@ -288,7 +289,7 @@ elseif ($rec == 'show') {
         // 上传图片生成
         if ($_FILES['show_img']['name'] != "") {
             // 分析广告图片名称
-            $basename = addslashes(basename($_POST['show_img']));
+            $basename = basename($_POST['show_img']);
             $file_name = substr($basename, 0, strrpos($basename, '.'));
             
             $upfile = $img->upload_image('show_img', "$file_name"); // 上传的文件域

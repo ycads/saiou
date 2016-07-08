@@ -632,6 +632,25 @@ class Common extends DbMysql {
                 return ture;
         }
     }
+
+    /**
+     * +----------------------------------------------------------
+     * 创建一个随机密码
+     * +----------------------------------------------------------
+     * $length 长度
+     * +----------------------------------------------------------
+     */
+    function create_password($length = 8) {
+        // 密码字符集，可任意添加你需要的字符
+        $chars = 'abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789!@#$%^&*-_~+=.?|';
+    
+        $password = '';
+        for ( $i = 0; $i < $length; $i++ ) {
+            $password .= $chars[mt_rand(0, strlen($chars) - 1)];
+        }
+    
+        return $password;
+    }
     
     /**
      * +----------------------------------------------------------
@@ -663,18 +682,15 @@ class Common extends DbMysql {
      * $charset 要处理的内容的编码，一般情况无需设置
      * +----------------------------------------------------------
      */
-    function dou_substr($str, $length, $clear_space = true, $charset = DOU_CHARSET) {
+    function dou_substr($str, $length, $charset = DOU_CHARSET) {
         $str = trim($str); // 清除字符串两边的空格
         $str = strip_tags($str, ""); // 利用php自带的函数清除html格式
+        $str = preg_replace("/\t/", "", $str); // 使用正则表达式匹配需要替换的内容，如：空格，换行，并将替换为空。
         $str = preg_replace("/\r\n/", "", $str);
         $str = preg_replace("/\r/", "", $str);
         $str = preg_replace("/\n/", "", $str);
-        // 判断是否清除空格
-        if ($clear_space) {
-            $str = preg_replace("/\t/", "", $str);
-            $str = preg_replace("/ /", "", $str);
-            $str = preg_replace("/&nbsp;/", "", $str); // 匹配html中的空格
-        }
+        $str = preg_replace("/ /", "", $str);
+        $str = preg_replace("/&nbsp; /", "", $str); // 匹配html中的空格
         $str = trim($str); // 清除字符串两边的空格
         
         if (function_exists("mb_substr")) {

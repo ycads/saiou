@@ -203,7 +203,7 @@ elseif ($rec == 'update') {
         
         // 分析商品图片名称
         if ($image) {
-            $basename = addslashes(basename($image));
+            $basename = basename($image);
             $file_name = substr($basename, 0, strrpos($basename, '.'));
         } else {
             $file_name = $_POST['id'];

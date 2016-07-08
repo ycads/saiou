@@ -12,9 +12,9 @@
 <div id="dcWrap"> {include file="header.htm"}
  <div id="dcLeft">{include file="menu.htm"}</div>
  <div id="dcMain"> {include file="ur_here.htm"}
-  <div id="subBox">
-   <div id="sMenu">
-    <h3><i class="mobile"></i>{$lang.mobile}</h3>
+  <div id="mobileBox">
+   <div id="mMenu">
+    <h3>{$lang.mobile}</h3>
     <ul>
      <li><a href="mobile.php"{if $rec eq 'system'} class="cur"{/if}>{$lang.mobile_system}</a></li>
      <li><a href="mobile.php?rec=nav"{if $rec eq 'nav'} class="cur"{/if}>{$lang.mobile_nav}</a></li>
@@ -22,7 +22,7 @@
      <li><a href="mobile.php?rec=theme"{if $rec eq 'theme'} class="cur"{/if}>{$lang.mobile_theme}</a></li>
     </ul>
    </div>
-   <div id="sMain">
+   <div id="mMain">
     <div class="mainBox" style="{$workspace.height}">
      <!-- {if $rec eq 'system'} 手机版设置 开始 -->
      <h3>{$ur_here}</h3>

@@ -59,8 +59,6 @@ class Cloud {
         } else {
             if ($type == 'system') {
                 $down_url = 'http://down.douco.com/' . $mode . '/' . $cloud_id . '.zip';
-            } elseif ($type == 'onedou') {
-                $down_url = 'http://cloud.douco.com/onedou/' . $cloud_id . '.html';
             } else {
                 $down_url = 'http://cloud.douco.com/extend/down/' . $cloud_id . '.html';
             }
@@ -144,7 +142,7 @@ class Cloud {
                             $module_type = 'single_module';
                             
                             // 会员模块加入显示设置项和自定义设置项
-                            if (strpos($sql, 'CREATE-SYSTEM-CONFIG') !== false) $this->change_system($cloud_id);
+                            if ($cloud_id == 'user') $this->change_system($cloud_id);
                         } else {
                             $module_type = 'column_module';
                             
@@ -306,10 +304,9 @@ class Cloud {
      * +----------------------------------------------------------
      * $cloud_id 模块ID
      * $del 删除操作
-     * $display_option 是否写入显示项
      * +----------------------------------------------------------
      */
-    function change_system($cloud_id, $del = false, $display_option = true) {
+    function change_system($cloud_id, $del = false) {
         // 序列化恢复
         $display = unserialize($GLOBALS['_CFG']['display']);
         $defined = unserialize($GLOBALS['_CFG']['defined']);
@@ -332,7 +329,7 @@ class Cloud {
         
         // 重新写入系统设置项
         $GLOBALS['dou']->query("UPDATE " . $GLOBALS['dou']->table('config') . " SET value = '" . serialize($defined) . "' WHERE name = 'defined'");
-        if ($display_option) {
+        if ($cloud_id != 'user') {
             $GLOBALS['dou']->query("UPDATE " . $GLOBALS['dou']->table('config') . " SET value = '" . serialize($display) . "' WHERE name = 'display'");
             $GLOBALS['dou']->query("UPDATE " . $GLOBALS['dou']->table('config') . " SET value = '" . serialize($mobile_display) . "' WHERE name = 'mobile_display'");
         }
@@ -464,7 +461,7 @@ class Cloud {
     
         if(function_exists('curl_init')) {
             $ch = curl_init();
-            $data = array('user' => $cloud_account['user'], 'password' => $cloud_account['password'], 'url' => ROOT_URL);  
+            $data = array('user' => $cloud_account['user'], 'password' => $cloud_account['password']);  
             curl_setopt($ch, CURLOPT_URL, $file_url);  
             curl_setopt($ch, CURLOPT_POST, 1);  
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);  

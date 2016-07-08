@@ -38,7 +38,7 @@ while ($row = $dou->fetch_array($query)) {
     $image = $row['image'] ? ROOT_URL . $row['image'] : '';
     
     // 如果描述不存在则自动从详细介绍中截取
-    $description = $row['description'] ? $row['description'] : $dou->dou_substr($row['content'], 200, false);
+    $description = $row['description'] ? $row['description'] : $dou->dou_substr($row['content'], 200);
     
     $article_list[] = array (
             "id" => $row['id'],

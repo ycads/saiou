@@ -250,4 +250,77 @@ elseif ($rec == 'manager_log') {
     
     $smarty->display('manager.htm');
 }
+
+/**
+ * +----------------------------------------------------------
+ * 设置云账户
+ * +----------------------------------------------------------
+ */
+elseif ($rec == 'cloud_account') {
+    if ($_USER['action_list'] != 'ALL') {
+        $dou->dou_msg($_LANG['without'], 'manager.php');
+    }
+    
+    $cloud_account = unserialize($_CFG['cloud_account']);
+    
+    if ($_REQUEST['action'] == 'set' || !$cloud_account)
+        $smarty->assign('action', 'set');
+
+    // CSRF防御令牌生成
+    $smarty->assign('token', $firewall->set_token('cloud_account'));
+
+    $smarty->assign('ur_here', $_LANG['cloud_account']);
+    $smarty->assign('cloud_account', $cloud_account);
+    $smarty->display('manager.htm');
+} 
+
+/**
+ * +----------------------------------------------------------
+ * 设置云账户
+ * +----------------------------------------------------------
+ */
+elseif ($rec == 'cloud_account_post') {
+    if ($_USER['action_list'] != 'ALL') {
+        $dou->dou_msg($_LANG['without'], 'manager.php');
+    }
+
+    // 验证用户名
+    if (!$check->is_email($_POST['cloud_user']))
+        $dou->dou_msg($_LANG['cloud_account_user_wrong'], 'manager.php?rec=cloud_account&action=set');
+    
+    // 验证密码
+    if (!$check->is_password($_POST['cloud_password']))
+        $dou->dou_msg($_LANG['cloud_account_password_wrong'], 'manager.php?rec=cloud_account&action=set');
+    
+    $cloud_account['user'] = $_POST['cloud_user'];
+    $cloud_account['password'] = md5($_POST['cloud_password']);
+    
+    // CSRF防御令牌验证
+    $firewall->check_token($_POST['token'], 'cloud_account');
+
+    $cloud_account = serialize($cloud_account);
+    $sql = "UPDATE " . $dou->table('config') . " SET value = '$cloud_account' WHERE name = 'cloud_account'";
+    $dou->query($sql);
+    
+    $dou->create_admin_log($_LANG['cloud_account'] . ': ' . $_POST['cloud_user']);
+    $dou->dou_msg($_LANG['cloud_account_success'], 'manager.php?rec=cloud_account');
+} 
+
+/**
+ * +----------------------------------------------------------
+ * 清空云账户
+ * +----------------------------------------------------------
+ */
+elseif ($rec == 'cloud_account_clean') {
+    if ($_USER['action_list'] != 'ALL') {
+        $dou->dou_msg($_LANG['without'], 'manager.php');
+    }
+
+    $sql = "UPDATE " . $dou->table('config') . " SET value = '' WHERE name = 'cloud_account'";
+    $dou->query($sql);
+    
+    $dou->create_admin_log($_LANG['cloud_account_clean']);
+    $dou->dou_msg($_LANG['cloud_account_clean_success'], 'manager.php?rec=cloud_account');
+} 
+
 ?>

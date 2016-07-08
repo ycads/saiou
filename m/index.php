@@ -17,7 +17,7 @@ require (dirname(__FILE__) . '/include/init.php');
 
 // 如果存在搜索词则转入搜索页面
 if ($_REQUEST['s']) {
-    if ($check->is_search_keyword($keyword = trim($_REQUEST['s']))) {
+    if ($check->is_text($keyword = trim($_REQUEST['s']))) {
         require (ROOT_PATH . M_PATH . '/include/search.inc.php');
     } else {
         $dou->dou_msg($_LANG['search_keyword_wrong']);

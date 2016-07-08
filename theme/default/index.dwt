@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="{$keywords}" />
 <meta name="description" content="{$description}" />
-<meta name="generator" content="saiou,赛欧,赛欧瓷砖,瓷砖" />
+<meta name="generator" content="DouPHP v1.3" />
 <title>{$page_title}</title>
 <link href="hover-min.css" rel="stylesheet" type="text/css" />
 <link href="bootstrap.css" rel="stylesheet" type="text/css" />

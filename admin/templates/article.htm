@@ -171,13 +171,13 @@
       <tr>
        <td align="right">{$lang.keywords}</td>
        <td>
-        <input type="text" name="keywords" value="{$article.keywords}" size="114" class="inpMain" />
+        <input type="text" name="keywords" value="{$article.keywords}" size="50" class="inpMain" />
        </td>
       </tr>
       <tr>
        <td align="right">{$lang.description}</td>
        <td>
-        <textarea name="description" cols="115" rows="3" class="textArea" />{$article.description}</textarea>
+        <input type="text" name="description" value="{$article.description}" size="50" class="inpMain" />
        </td>
       </tr>
       <tr>
@@ -196,22 +196,20 @@
  </div>
  {include file="footer.htm"}
  </div>
-<!-- {if $rec eq 'default'} 文章列表 -->
-<script type="text/javascript">
-{literal}
-onload = function()
-{
-  document.forms['action'].reset();
-}
+ <script type="text/javascript">
+ {literal}
+ onload = function()
+ {
+   document.forms['action'].reset();
+ }
 
-function douAction()
-{
-    var frm = document.forms['action'];
+ function douAction()
+ {
+     var frm = document.forms['action'];
 
-    frm.elements['new_cat_id'].style.display = frm.elements['action'].value == 'category_move' ? '' : 'none';
-}
-{/literal}
-</script>
-<!-- {/if} -->
+     frm.elements['new_cat_id'].style.display = frm.elements['action'].value == 'category_move' ? '' : 'none';
+ }
+ {/literal}
+ </script>
 </body>
 </html>

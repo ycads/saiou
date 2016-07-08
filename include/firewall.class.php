@@ -27,26 +27,7 @@ class Firewall {
     
     /**
      * +----------------------------------------------------------
-     * 安全处理用户输入信息
-     * +----------------------------------------------------------
-     */
-    function dou_foreground($value) {
-        if (is_array($value)) {
-            foreach ($value as $k => $v) {
-                $value[$k] = htmlspecialchars($v, ENT_QUOTES);
-            }
-        } else {
-            $value = htmlspecialchars($value, ENT_QUOTES);
-        }
-        
-        return $value;
-    }
-    
-    /**
-     * +----------------------------------------------------------
      * 交互数据转义操作
-     * 使用addslashes前必须先判断magic_quotes_gpc是否开启，如果开启的情况下还使用addslashes会导致双层转义，即写入的数据会出现/。
-     * 服务器默认开启magic_quotes_gpc时会对post、get、cookie过来的数据增加转义字符
      * +----------------------------------------------------------
      */
     function dou_magic_quotes() {
@@ -61,7 +42,6 @@ class Firewall {
     /**
      * +----------------------------------------------------------
      * 递归方式的对变量中的特殊字符进行转义
-     * 使用addslashes转义会为引号加上反斜杠，但写入数据库时MYSQL会自动将反斜杠去掉
      * +----------------------------------------------------------
      */
     function addslashes_deep($value) {
@@ -109,6 +89,24 @@ class Firewall {
         } else {
             $value = stripslashes($value);
         }
+        return $value;
+    }
+    
+    /**
+     * +----------------------------------------------------------
+     * html安全过滤器
+     * +----------------------------------------------------------
+     */
+    function dou_filter($value) {
+        if (is_array($value)) {
+            foreach ($value as $k => $v) {
+                $value[$k] = htmlspecialchars($v, ENT_NOQUOTES);
+            }
+        } else {
+            // 参数ENT_NOQUOTES代表不转义任何引号，避免与addslashes冲突
+            $value = htmlspecialchars($value, ENT_NOQUOTES);
+        }
+        
         return $value;
     }
     

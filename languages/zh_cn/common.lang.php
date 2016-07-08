@@ -20,7 +20,7 @@ $_LANG['click'] = '点击数';
 $_LANG['price'] = '价格';
 $_LANG['price_format'] = '￥d% 元';
 $_LANG['price_discuss'] = '面议';
-$_LANG['copyright'] = '© d% 2016 All Rights Reserved.';
+$_LANG['copyright'] = '© d% 2015 All Rights Reserved.';
 $_LANG['powered_by'] = "<a href='http://www.douco.com' target='_blank'>Powered by DouPHP</a>";
 $_LANG['home'] = '首页';
 $_LANG['add_favorite'] = '收藏本站';
@@ -33,7 +33,6 @@ $_LANG['captcha_wrong'] = '验证码错误或者为空！';
 $_LANG['captcha_refresh'] = '看不清？点击更换另一个验证码。';
 $_LANG['page_wrong'] = '页面不存在！';
 $_LANG['illegal'] = '操作有误';
-$_LANG['illegal_char'] = '中含有非法字符';
 $_LANG['go_top'] = '返回顶部';
 $_LANG['dou_pc'] = '电脑版';
 $_LANG['dou_mobile'] = '手机版';
@@ -84,6 +83,10 @@ $_LANG['pager_next'] = '下一页';
 // 在线客服
 $_LANG['online'] = '在线客服';
 $_LANG['online_qq'] = 'QQ交谈';
+
+//关于我们
+$_LANG['aboutme'] = '关于我们';
+$_LANG['ourproduct'] = '我们的产品';
 
 // 提示信息
 $_LANG['dou_msg'] = '信息提示';

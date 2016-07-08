@@ -21,7 +21,7 @@ $rec = $check->is_rec($_REQUEST['rec']) ? $_REQUEST['rec'] : 'default';
 
 // 初始化
 $sqlcharset = str_replace('-', '', DOU_CHARSET);
-$backup = new Backup($sqlcharset);
+$dump = new Backup($sqlcharset);
 @ set_time_limit(0);
 
 // 赋值给模板
@@ -79,7 +79,7 @@ if ($rec == 'backup') {
     $file_name = $_REQUEST['file_name']; // 备份文件名
     
     // 判断备份文件名是否规范
-    if (!$backup->is_backup_file($file_name . '.sql'))
+    if (!$check->is_backup_file($file_name . '.sql'))
         $dou->dou_msg($_LANG['backup_file_name_not_valid'], 'backup.php');
         
     // CSRF防御令牌验证
@@ -114,7 +114,7 @@ if ($rec == 'backup') {
     $tablenumber = count($tables);
     
     for($i = $tableid; $i < $tablenumber && strlen($sqldump) < $vol_size * 1024; $i++) {
-        $sqldump .= $backup->sql_dumptable($tables[$i], $vol_size, $startfrom, strlen($sqldump));
+        $sqldump .= $dump->sql_dumptable($tables[$i], $vol_size, $startfrom, strlen($sqldump));
         $startfrom = 0;
     }
     
@@ -199,7 +199,7 @@ if ($rec == 'restore') {
  */
 if ($rec == 'import') {
     // 验证并获取合法的备份文件名
-    $sql_file_name = $backup->is_backup_file($_REQUEST['sql_file_name']) ? $_REQUEST['sql_file_name'] : $dou->dou_msg($_LANG['backup_file_name_not_valid'], 'backup.php');
+    $sql_file_name = $check->is_backup_file($_REQUEST['sql_file_name']) ? $_REQUEST['sql_file_name'] : $dou->dou_msg($_LANG['backup_file_name_not_valid'], 'backup.php');
     
     // 判断备份文件名是否是分卷的格式
     preg_match('/(.*)_([0-9])+\.sql$/', $sql_file_name, $match);
@@ -244,7 +244,7 @@ if ($rec == 'import') {
  */
 if ($rec == 'del') {
     // 验证并获取合法的备份文件名
-    $sql_file_name = $backup->is_backup_file($_REQUEST['sql_file_name']) ? $_REQUEST['sql_file_name'] : $dou->dou_msg($_LANG['backup_file_name_not_valid'], 'backup.php');
+    $sql_file_name = $check->is_backup_file($_REQUEST['sql_file_name']) ? $_REQUEST['sql_file_name'] : $dou->dou_msg($_LANG['backup_file_name_not_valid'], 'backup.php');
     
     if (isset($_POST['confirm']) ? $_POST['confirm'] : '') {
         if (file_exists(ROOT_PATH . 'data/backup/' . $sql_file_name)) {
@@ -283,7 +283,7 @@ if ($rec == 'del') {
  */
 if ($rec == 'down') {
     // 验证并获取合法的备份文件名
-    $sql_file_name = $backup->is_backup_file($_REQUEST['sql_file_name']) ? $_REQUEST['sql_file_name'] : $dou->dou_msg($_LANG['backup_file_name_not_valid'], 'backup.php');
+    $sql_file_name = $check->is_backup_file($_REQUEST['sql_file_name']) ? $_REQUEST['sql_file_name'] : $dou->dou_msg($_LANG['backup_file_name_not_valid'], 'backup.php');
     
     ob_clean();
     if ($fp = @ fopen(ROOT_PATH . 'data/backup/' . $sql_file_name, 'r')) {

@@ -6,7 +6,7 @@
  <ul class="recommendProduct">
   <!-- {foreach from=$recommend_product name=recommend_product item=product} -->
   <li style="width: 200px;height: 250px; margin-bottom: 10px;">
-  	<div class="view view-tenth">
+  	<div class="view">
         <img src="{$product.thumb}" />
         <div class="mask" style="padding-right: 20px">
             <h2>{$product.name}</h2>

@@ -82,16 +82,5 @@ class Backup {
     function fileext($filename) {
         return trim(substr(strrchr($filename, '.'), 1));
     }
-
-    /**
-     * +----------------------------------------------------------
-     * 判断备份文件名是否规范
-     * +----------------------------------------------------------
-     */
-    function is_backup_file($file_name) {
-        if (preg_match("/^[a-zA-Z0-9_]+.sql$/", $file_name)) {
-            return true;
-        }
-    }
 }
 ?>

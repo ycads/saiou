@@ -42,7 +42,7 @@ require (ROOT_PATH . 'include/smarty/Smarty.class.php');
 require (ROOT_PATH . 'include/mysql.class.php');
 require (ROOT_PATH . 'include/common.class.php');
 require (ROOT_PATH . ADMIN_PATH . '/include/action.class.php');
-require (ROOT_PATH . 'include/check.class.php');
+require (ROOT_PATH . ADMIN_PATH . '/include/check.class.php');
 require (ROOT_PATH . 'include/firewall.class.php');
 
 // 实例化类

@@ -205,7 +205,7 @@ elseif ($rec == 'update') {
     // 上传图片生成
     if ($_FILES['image']['name'] != "") {
         // 获取图片文件名
-        $basename = addslashes(basename($_POST['image']));
+        $basename = basename($_POST['image']);
         $file_name = substr($basename, 0, strrpos($basename, '.'));
         
         $upfile = $img->upload_image('image', "$file_name"); // 上传的文件域

@@ -13,9 +13,8 @@
  */
 define('IN_DOUCO', true);
 
-// 强制在移动端中显示PC版
 if (isset($_REQUEST['mobile'])) {
-    setcookie('client', 'pc');
+    setcookie('client', 'pc'); // 判断时候强制在移动端中显示PC版
     if ($_COOKIE['client'] != 'pc') $_COOKIE['client'] = 'pc';
 }
 
@@ -23,7 +22,7 @@ require (dirname(__FILE__) . '/include/init.php');
 
 // 如果存在搜索词则转入搜索页面
 if ($_REQUEST['s']) {
-    if ($check->is_search_keyword($keyword = trim($_REQUEST['s']))) {
+    if ($check->is_text($keyword = trim($_REQUEST['s']))) {
         require (ROOT_PATH . 'include/search.inc.php');
     } else {
         $dou->dou_msg($_LANG['search_keyword_wrong']);
@@ -37,7 +36,7 @@ $about = $dou->fetch_array($query);
 
 // 写入到index数组
 $index['about_name'] = $about['page_name'];
-$index['about_content'] = $about['description'] ? $about['description'] : $dou->dou_substr($about['content'], 300, false); // 这里的300数值不能设置得过大，否则会造成程序卡死
+$index['about_content'] = $dou->dou_substr($about['content'], 300);
 $index['about_link'] = $dou->rewrite_url('page', '1');
 $index['cur'] = true;
 

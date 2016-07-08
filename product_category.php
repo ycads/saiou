@@ -36,7 +36,7 @@ while ($row = $dou->fetch_array($query)) {
     $add_time = date("Y-m-d", $row['add_time']);
     
     // 如果描述不存在则自动从详细介绍中截取
-    $description = $row['description'] ? $row['description'] : $dou->dou_substr($row['content'], 150, false);
+    $description = $row['description'] ? $row['description'] : $dou->dou_substr($row['content'], 150);
     
     // 生成缩略图的文件名
     $image = explode(".", $row['image']);

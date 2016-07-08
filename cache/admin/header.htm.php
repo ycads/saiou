@@ -1,8 +1,8 @@
-<?php /* Smarty version 2.6.26, created on 2016-07-08 10:41:45
+<?php /* Smarty version 2.6.26, created on 2016-04-22 19:42:01
          compiled from header.htm */ ?>
 <div id="dcHead">
  <div id="head">
-  <div class="logo"><a href="index.php"><img src="images/dclogo.gif" alt="logo"></a></div>
+  <div class="logo"><a href="index.php"></a></div>
   <div class="nav">
    <ul>
     <li class="M"><a href="JavaScript:void(0);" class="topAdd"><?php echo $this->_tpl_vars['lang']['top_add']; ?>
@@ -34,7 +34,7 @@
       <a href="manager.php?rec=edit&id=<?php echo $this->_tpl_vars['user']['user_id']; ?>
 "><?php echo $this->_tpl_vars['lang']['top_manager_edit']; ?>
 </a>
-      <a href="cloud.php?rec=account"><?php echo $this->_tpl_vars['lang']['cloud_account']; ?>
+      <a href="manager.php?rec=cloud_account"><?php echo $this->_tpl_vars['lang']['cloud_account']; ?>
 </a>
      </div>
     </li>
