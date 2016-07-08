@@ -508,7 +508,8 @@ class Action extends Common {
         global $_CFG;
         global $sys_info;
         
-        
+        $apiget = "ver=$_CFG[douphp_version]&update=$sys_info[update]&patch=$sys_info[patch]&lang=$_CFG[language]&php_ver=$sys_info[php_ver]&mysql_ver=$sys_info[mysql_ver]&os=$sys_info[os]&web_server=$sys_info[web_server]&charset=$sys_info[charset]&template=$_CFG[site_theme]&url=" . ROOT_URL;
+        return "http://api.douco.com/update.php" . '?' . $apiget;
     }
     
     /**
